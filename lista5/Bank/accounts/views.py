@@ -26,7 +26,7 @@ def SignUp(request):
             user = form.save(commit=False)
             user.is_active = True
             user.save()
-            # login(request, user)
+            login(request, user)
             # mail_subject = 'Aktywuj swoje konto.'
             # message = render_to_string('acc_active_email.html', {
             #     'user': user,
