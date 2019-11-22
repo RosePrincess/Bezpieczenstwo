@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "Switch Number Account",
+    "version": "1.0.0",
+
+    "browser_action": {
+        "default_icon": "resources/icon.png",
+        "default_title": "Switch account"
+    },
+    "content_scripts": [
+        {
+            "matches": [ "*://localhost/*"],
+            "js": ["main.js"]
+        }
+        ],
+    "permissions": [
+        "unlimitedStorage",
+        "notifications"
+    ]
+}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %} Bank {% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+    <h1>History of your transfers</h1>
+        <form method="post">
+            {% csrf_token %}
+            <table id="table">
+                <tr>
+                    <th>Receiver</th>
+                    <th>Receiver's number account</th>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                 </tr>
+            {% for t in transfers %}
+                <tr>
+                    <td>{{ t.receiver_name }}</td>
+                    <td name="account">{{ t.receiver_account }}</td>
+                    <td>{{ t.title }}</td>
+                    <td>{{ t.amount }}</td>
+                    <td name="date">{{ t.date }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </form>
+        <a href="{% url 'home' %}" class="button">Come back</a>
+    {% else %}
+         <p>You're not logged!</p>
+        <a href="{% url 'login' %}" class="button">Sign in</a>
+        <a href="{% url 'signup' %}" class="button">Sign up</a>
+    {% endif %}
+{% endblock %}

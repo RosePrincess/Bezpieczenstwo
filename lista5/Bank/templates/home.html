@@ -1,0 +1,18 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <h1>Hi {{ user.username }}!</h1>
+  <p class="options"><a href="{% url 'transfer' %}">do transfer</a></p>
+  <p class="options"><a href="{% url 'transfers_history' %}">history</a></p>
+    <p class="options"><a href="{% url 'password_reset' %}">reset password</a></p>
+  <p class="options"><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}" class="button">Sign In</a>
+  <a href="{% url 'signup' %}" class="button">Sign Up</a>
+{% endif %}
+{% endblock %}

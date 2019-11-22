@@ -1,0 +1,47 @@
+body {
+    background-image: url("background1.jpg");
+    background-repeat: no-repeat; 
+    height: 100%; 
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: auto
+}
+* {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+h1 {
+    color: black;
+    text-decoration-style: solid;
+    text-transform: capitalize;
+}
+
+
+
+.options a {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    text-decoration-style: solid;
+    text-transform: uppercase;
+
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    background-color: rgba(119, 112, 113, 0.678);
+    margin: 25px 80vw 25px 5px;
+    padding: 10px 5px 10px 5px;
+}
+.button {
+    background-color: rgb(153, 79, 92);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block
+}
+
