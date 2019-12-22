@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+  {% if user.is_authenticated %}
+    <h1>Confirm data</h1>
+    {% comment %} <form action="" method="post"> {% endcomment %}
+      {% csrf_token %}
+      <p >
+		{{ transfer.receiver_name.errors }}
+		<label for="{{ transfer.receiver_name.id_for_label }}">Receiver name:</label>
+		{{ transfer.receiver_name | safe }}
+	</p>
+  <p >
+  {{ transfer.receiver_account.errors }}
+		<label for="{{ transfer.receiver_account.id_for_label }}"> Receiver number account: </label>
+		<h3 id='account'> {{ transfer.receiver_account }}</h3>
+	</p>
+	<p >
+		{{ transfer.title.errors }}
+		<label for="{{ transfer.title.id_for_label }}">Title:</label>
+		{{ transfer.title | safe}}
+	</p>
+	<p >
+		{{ transfer.amount.errors }}
+		<label for="{{ transfer.amount.id_for_label }}">Amount: </label>
+		{{ transfer.amount }}
+	 </p>
+   <p >
+		{{ transfer.date.errors }}
+		<label for="{{ transfer.date.id_for_label }}">Date: </label>
+		{{ transfer.date}}
+	</p>
+    <form method="post" id='form_id'>
+        <button type="submit" class="button">Confirm transfer</button>
+     </form>
+    
+    {% else %}
+      <p>You're not logged!</p>
+        <a href="{% url 'login' %}" class="button">Sign in</a>
+        <a href="{% url 'signup' %}" class="button">Sign up</a>
+    {% endif %}
+  {% comment %} </form> {% endcomment %}
+{% endblock %}

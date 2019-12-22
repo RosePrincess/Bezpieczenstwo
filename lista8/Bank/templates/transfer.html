@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+  {% if user.is_authenticated %}
+    <h1>Make transfer</h1>
+    <div class="form">
+    <form action="" method="post" id="transfer_sending_form">
+      {% csrf_token %}
+      <table id="table">
+      {{ form.as_table }}
+      </table>
+      {% comment %} <a id="submit_form">Click this</a> {% endcomment %}
+      <button type="button" id="submit_form" class="button">Submit</button>
+    {% else %}
+      <p>You're not logged!</p>
+        <a href="{% url 'login' %}" class="button">Sign in</a>
+        <a href="{% url 'signup' %}" class="button">Sign up</a>
+    {% endif %}
+  </form>
+  </div>
+{% endblock %}

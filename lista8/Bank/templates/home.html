@@ -1,0 +1,25 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  {% if user.is_superuser %}
+    <p>You are admin</p>
+    <a href="{% url 'transfers_to_confirm' %}" class="button">Transfers to confirm</a>
+    <a href="{% url 'logout' %}" class="button">log out</a>
+  {% else %}
+    <h1>Hi {{ user.username }}!</h1>
+    <p class="options"><a href="{% url 'transfer' %}">do transfer</a></p>
+    <p class="options"><a href="{% url 'transfers_history' %}">history</a></p>
+    <p class="options"><a href="{% url 'password_reset' %}">reset password</a></p>
+    <p class="options"><a href="{% url 'logout' %}">log out</a></p>
+  {% endif %}
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}" class="button">Sign In</a>
+  <a href="{% url 'signup' %}" class="button">Sign Up</a>
+  <a href="{% url 'password_reset' %}" class="button">Remind password</a>
+{% endif %}
+{% endblock %}

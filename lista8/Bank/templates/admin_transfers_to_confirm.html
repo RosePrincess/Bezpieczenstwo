@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %} Admin Confirm {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <h1>Transfers to confirm</h1>
+        {% comment %} <form method="post"> {% endcomment %}
+            {% csrf_token %}
+            <table id="table" onclick="myFunction(event)">
+                <tr>
+                    <th>Receiver</th>
+                    <th>Receiver's number account</th>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Confirm</th>
+                 </tr>
+            {% for t in transfers %}
+                <tr>
+                    <td>{{ t.receiver_name | safe}}</td>
+                    <td name="account">{{ t.receiver_account }}</td>
+                    <td>{{ t.title | safe}}</td>
+                    <td>{{ t.amount }}</td>
+                    <td name="date">{{ t.date }}</td>
+                    <td><form method="post" id='form_id'>
+                    <button class="button">Confirm</button>
+                    </form></td>
+                    {% comment %} <td><button onclick="confirm(t.id)">Confirmed</button></td> {% endcomment %}
+                    {% comment %} <a href="/confirm?id={{t.id}}">Give confirmation</input> {% endcomment %}
+                </tr>
+            {% endfor %}
+            </table>
+        {% comment %} </form> {% endcomment %}
+        <a href="{% url 'home' %}" class="button">Come back</a>
+    {% else %}
+         <p>You're not logged!</p>
+        <a href="{% url 'login' %}" class="button">Sign in</a>
+        <a href="{% url 'signup' %}" class="button">Sign up</a>
+    {% endif %}
+{% endblock %}
