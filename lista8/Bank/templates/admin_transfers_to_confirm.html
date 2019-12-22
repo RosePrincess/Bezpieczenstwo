@@ -4,7 +4,7 @@
 {% block content %}
     {% if user.is_authenticated %}
     <h1>Transfers to confirm</h1>
-        <form action="{% url 'transfers_to_confirm' %}" method="POST">
+        <form action="{% url 'transfers_to_confirm' %}" method="POST" id='form_id'>
             {% csrf_token %}
             <table id="table">
                 <tr>
