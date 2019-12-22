@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from transfers.forms import TransferForm
 from transfers.models import PreparedTransfer, Transfer
 
@@ -81,7 +81,10 @@ def admin_transfers_to_confirm(request):
             transfers.append(item)
 
     if request.method == 'POST':
-        return redirect('confirm_transfer')
+        print("________")
+        print(request.POST['transfer'])
+        print("________")
+        return redirect('confirm_transfer', transfer_id=request.POST['transfer'])
 
     context = {
         'transfers': transfers
@@ -90,23 +93,13 @@ def admin_transfers_to_confirm(request):
 
 @csrf_exempt
 @user_passes_test(lambda user: user.is_superuser)
-def admin_confirm_transfer(request):
-    transfers = []
-
-    for item in Transfer.objects.all():
-        if item.confirm == False:
-            transfers.append(item)
-    
-    t = transfers[0]
-
+def admin_confirm_transfer(request, transfer_id):
+    id = get_object_or_404(Transfer, id=transfer_id)
     if request.method == 'POST':
-        Transfer.objects.filter(id=t.id).update(confirm=True)
+        Transfer.objects.filter(id=id).update(confirm=True)
         return redirect('home')
 
-    context = {
-        'transfer': t
-    }
-    return render(request, 'admin_confirm_transfer.html', context)
+    return render(request, 'admin_confirm_transfer.html', {'id': id})
 
 @csrf_exempt
 @user_passes_test(lambda user: user.is_superuser)

@@ -4,9 +4,9 @@
 {% block content %}
     {% if user.is_authenticated %}
     <h1>Transfers to confirm</h1>
-        {% comment %} <form method="post"> {% endcomment %}
+        <form action="{% url 'transfers_to_confirm' %}" method="POST">
             {% csrf_token %}
-            <table id="table" onclick="myFunction(event)">
+            <table id="table">
                 <tr>
                     <th>Receiver</th>
                     <th>Receiver's number account</th>
@@ -20,17 +20,22 @@
                     <td>{{ t.receiver_name | safe}}</td>
                     <td name="account">{{ t.receiver_account }}</td>
                     <td>{{ t.title | safe}}</td>
-                    <td>{{ t.amount }}</td>
+                    <td>{{ t.amount | safe}}</td>
                     <td name="date">{{ t.date }}</td>
-                    <td><form method="post" id='form_id'>
-                    <button class="button">Confirm</button>
-                    </form></td>
+                    {% comment %} <td><form method="post" id='form_id'>
+                    <input class="button" type='submit' name='{{t.id}}' value='confirm' >
+                    </form></td> {% endcomment %}
+                    <input type='hidden' name='transfer' value='{{ t.id }}'>
+                    <td>
+                    <button class='button' type='submit'>Confirm {{ t.id }}</button>
+                    </td>
+
                     {% comment %} <td><button onclick="confirm(t.id)">Confirmed</button></td> {% endcomment %}
                     {% comment %} <a href="/confirm?id={{t.id}}">Give confirmation</input> {% endcomment %}
                 </tr>
             {% endfor %}
             </table>
-        {% comment %} </form> {% endcomment %}
+        </form>
         <a href="{% url 'home' %}" class="button">Come back</a>
     {% else %}
          <p>You're not logged!</p>

