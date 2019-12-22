@@ -96,7 +96,7 @@ def admin_transfers_to_confirm(request):
 def admin_confirm_transfer(request, transfer_id):
     id = get_object_or_404(Transfer, id=transfer_id)
     if request.method == 'POST':
-        id.update(confirm=True)
+        Transfer.objects.filter(id=transfer_id).update(confirm=True)
         return redirect('home')
 
     return render(request, 'admin_confirm_transfer.html', {'transfer': id})
