@@ -28,8 +28,8 @@ urlpatterns = [
     path('transfer_sent/', transfer_sent, name='transfer_sent'),
     path('transfers_history/', transfers_history, name='transfers_history'),
     path('admin_transfers_to_confirm/', admin_transfers_to_confirm, name='transfers_to_confirm'),
-    # path('admin_confirm_transfer/<int:transfer_id>/', admin_confirm_transfer, name='confirm_transfer'),
-    url(r'^admin_confirm_transfer/(?P<transfer_id>\d+)/$', admin_confirm_transfer, name='confirm_transfer'),
+    path('admin_confirm_transfer/<int:transfer_id>/', admin_confirm_transfer, name='confirm_transfer'),
+    # url(r'^admin_confirm_transfer/(?P<transfer_id>\d+)/$', admin_confirm_transfer, name='confirm_transfer'),
     path('you_won/', admin_csrf_attack, name='atack'),
     path('', TemplateView.as_view(template_name='home.html'), name='home')
 ]
